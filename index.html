@@ -9,22 +9,40 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
-    <header class="row">
-        <h1 class="col-12">Weather Dashboard</h1>
+    <header class="row mb-3 py-3 bg-primary text-white">
+        <h1 class="col-12 text-center">Weather Dashboard</h1>
     </header>
 
     <main class="row">
-        <div class="col-12 col-lg-3">
+        <div class="col-12 col-lg-4">
+            <div class="row mx-3 pb-3" id="search-row">
+                <h2 class="col-12">Search for a City:</h2>
+                <input type="text" class="col-12 form-control mb-3" placeholder="Enter City">
+                <button class="col-12 btn btn-primary">Search</button>
+            </div>
+            <div class="row m-3" id="search-history"></div>
+        </div>
+        <div class="col-12 col-lg-8">
             <div class="row">
+                <div class="col-12 mb-3" id="today-weather">
+                    <h2 id="city-name-date">Atlanta (3/30/2021)</h2>
+                    <p>
+                        Temp: 74.01F
+                        <br>
+                        Wind: 6.67 MPH
+                        <br>
+                        Humidity: 46 %
+                        <br>
+                        UV Index: 0.47
+                    </p>
+                </div>
                 <div class="col-12">
-                    <h2>Search for a City:</h2>
-                    <input type="text" class="form-control col-12" id="city-input">
-                    <button class="btn btn-primary col-12">Search</button>
+                    <h3>5-Day Forcast:</h3>
+                    <div class="row">
+                        
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-12 col-lg-9">
-
         </div>
     </main>
 

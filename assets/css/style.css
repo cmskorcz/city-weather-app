@@ -1,0 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#search-row {
+    border-bottom: 3px solid grey;
+}
+
+#today-weather {
+    border: 2px solid grey;
+}
