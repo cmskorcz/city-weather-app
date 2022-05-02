@@ -15,11 +15,11 @@
 
     <main class="row">
         <div class="col-12 col-lg-4">
-            <div class="row mx-3 pb-3" id="search-row">
-                <h2 class="col-12">Search for a City:</h2>
-                <input type="text" class="col-12 form-control mb-3" placeholder="Enter City">
-                <button class="col-12 btn btn-primary">Search</button>
-            </div>
+            <form class="row mx-3 pb-3" id="search-form">
+                <label class="col-12 form-label h2" for="search-input">Search for a City:</label>
+                <input type="text" class="col-12 form-control mb-3" placeholder="Enter City" id="search-input">
+                <button type="submit" class="col-12 btn btn-primary" id="search-btn">Search</button>
+            </form>
             <div class="row m-3" id="search-history"></div>
         </div>
         <div class="col-12 col-lg-8">
