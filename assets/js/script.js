@@ -10,9 +10,17 @@ let windEl = document.getElementById('wind');
 let humidityEl = document.getElementById('humidity');
 let uvEl = document.getElementById('uv');
 
+
 const displayDate = () => {
-    let now = dayjs().format('MM/DD/YYYY');
+    let now = dayjs().format('(MM/DD/YYYY)');
     dateEl.textContent = now;
+
+    for (let i = 1; i < 6; i++) {
+        let futureDateEl = document.getElementById(`date+${i}`);
+        let date = dayjs().add(i, 'day').format('MM/DD/YYYY');
+        
+        futureDateEl.textContent = date;
+    }
 }
 
 const getCityGeo = (city) => {
@@ -46,7 +54,8 @@ const getCityWeather = (lat, lon, cityName) => {
             if(res.ok) {
                 res.json()
                     .then((data) => {
-                        displayWeather(data, cityName)
+                        displayWeather(data, cityName);
+                        displayFutureWeather(data.daily);
                 });
             } else {
                 alert('There was an error with finding the weather');
@@ -81,6 +90,11 @@ const displayForcast = (obj) => {
     humidityEl.textContent = obj.humidity;
     uvEl.textContent = obj.uvIndex;
 };
+
+const displayFutureWeather = (data) => {
+    for (let i = 1; i < 6; i++) {
+    }
+}
 
 const formSubmitHandler = (event) => {
     event.preventDefault();

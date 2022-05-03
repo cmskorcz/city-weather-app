@@ -24,3 +24,7 @@
     display: flex;
     justify-content: space-between;
 }
+
+.future-forcast {
+    list-style: none;
+}
