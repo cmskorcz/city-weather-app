@@ -8,6 +8,10 @@
     border-bottom: 3px solid grey;
 }
 
-#today-weather {
+#today-weather-container {
     border: 2px solid grey;
+}
+
+#today-weather-list {
+    padding-left: 0;
 }
