@@ -113,11 +113,27 @@ const formSubmitHandler = (event) => {
 
     if (city) {
         getCityGeo(city);
+        storeSeachHistory(city);
         searchInputEl.value = '';
     } else {
         alert('Please enter a city before submitting!');
     };
 };
+
+const storeSeachHistory = (city) => {
+    let buttonEl = document.createElement('button');
+    
+    buttonEl.classList = 'btn btn-secondary col-12 mb-3';
+
+    city = capitalizeFirstLetter(city);
+    buttonEl.textContent = city;
+
+    searchHistoryEl.appendChild(buttonEl);
+}
+
+const capitalizeFirstLetter = (string) => {
+    return string[0].toUpperCase() + string.slice(1);
+}
 
 displayDate();
 searchFormEl.addEventListener('submit', formSubmitHandler);
