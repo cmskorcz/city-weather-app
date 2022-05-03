@@ -131,6 +131,7 @@ const storeSeachHistory = (city) => {
     buttonEl.addEventListener('click', searchHistoryHandler);
 
     searchHistoryEl.appendChild(buttonEl);
+    saveLocalStorage(city);
 }
 
 const capitalizeFirstLetter = (string) => {
@@ -147,6 +148,24 @@ const searchHistoryHandler = (event) => {
         alert('Something went wrong!');
     }
 }
+
+const saveLocalStorage = (city) => {
+    let historyJSON = localStorage.getItem('weather-history');
+
+    if (!historyJSON) {
+        generateLocalStorage(city);
+    } else {
+        let historyArray = JSON.parse(historyJSON)
+        historyArray.push(city);
+        localStorage.setItem('weather-history', JSON.stringify(historyArray))
+        console.log(historyArray);
+    }
+}
+
+const generateLocalStorage = (city) => {
+    let newArray = [city];
+    localStorage.setItem('weather-history', JSON.stringify(newArray));
+};
 
 displayDate();
 searchFormEl.addEventListener('submit', formSubmitHandler);
