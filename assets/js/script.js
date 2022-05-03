@@ -128,11 +128,24 @@ const storeSeachHistory = (city) => {
     city = capitalizeFirstLetter(city);
     buttonEl.textContent = city;
 
+    buttonEl.addEventListener('click', searchHistoryHandler);
+
     searchHistoryEl.appendChild(buttonEl);
 }
 
 const capitalizeFirstLetter = (string) => {
     return string[0].toUpperCase() + string.slice(1);
+}
+
+const searchHistoryHandler = (event) => {
+    event.preventDefault();
+    let city = event.target.textContent;
+    
+    if (city) {
+        getCityGeo(city);
+    } else {
+        alert('Something went wrong!');
+    }
 }
 
 displayDate();
