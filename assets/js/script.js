@@ -167,5 +167,35 @@ const generateLocalStorage = (city) => {
     localStorage.setItem('weather-history', JSON.stringify(newArray));
 };
 
+const displayHistory = () => {
+    let historyJSON = localStorage.getItem('weather-history');
+
+    if (!historyJSON) {
+        return;
+    };
+
+    let historyArray = JSON.parse(historyJSON);
+
+    historyArray.forEach((city) => {
+        let buttonEl = document.createElement('button');
+    
+        buttonEl.classList = 'btn btn-secondary col-12 mb-3';
+    
+        city = capitalizeFirstLetter(city);
+        buttonEl.textContent = city;
+    
+        buttonEl.addEventListener('click', searchHistoryHandler);
+    
+        searchHistoryEl.appendChild(buttonEl);    
+    });
+
+    getCityGeo(historyArray[mostRecentSearch(historyArray)]);
+};
+
+const mostRecentSearch = (array) => {
+    return array.length - 1;
+};
+
 displayDate();
+displayHistory();
 searchFormEl.addEventListener('submit', formSubmitHandler);
