@@ -24,9 +24,16 @@
         </div>
         <div class="col-12 col-lg-8">
             <div class="row me-3">
-                <div class="col-12 mb-3 " id="today-weather-container">
-                    <h2 id="city-name"><span id="date">(3/30/2021)</span></h2>
-                    <ul class="list-group-flush" id="today-weather-list"></ul>
+                <div class="col-12 mb-3" id="today-weather-container">
+                    <div id="heading-container">
+                        <h2 id="city-name"></h2><span class="h2" id="date"></span>
+                    </div>
+                    <ul class="list-group-flush" id="today-weather-list">
+                        <li class="list-group-item">Temp: <span id="temp"></span></li>
+                        <li class="list-group-item">Wind: <span id="wind"></span></li>
+                        <li class="list-group-item">Humidity: <span id="humidity"></span></li>
+                        <li class="list-group-item">UV: <span id="uv"></span></li>
+                    </ul>
                 </div>
                 <div class="col-12">
                     <h3>5-Day Forcast:</h3>
@@ -39,6 +46,7 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 </html>

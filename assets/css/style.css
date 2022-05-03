@@ -15,3 +15,12 @@
 #today-weather-list {
     padding-left: 0;
 }
+
+#city-name {
+    display: inline;
+}
+
+#heading-container {
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,12 +1,19 @@
-const GEO_API_KEY = '1f6d1a1e5f8971c7d7609741b9cbc241'
 const WEATHER_API_KEY = 'bc8dee79f60c665335a895eb0f9a0afb'
 
 let searchHistoryEl = document.getElementById('search-history');
 let searchInputEl = document.getElementById('search-input');
 let searchFormEl = document.getElementById('search-form');
-let weatherContainerEl = document.getElementById('today-weather-container');
-let forcastListEl = document.getElementById('today-weather-list');
 
+let dateEl = document.getElementById('date');
+let tempEl = document.getElementById('temp');
+let windEl = document.getElementById('wind');
+let humidityEl = document.getElementById('humidity');
+let uvEl = document.getElementById('uv');
+
+const displayDate = () => {
+    let now = dayjs().format('MM/DD/YYYY');
+    dateEl.textContent = now;
+}
 
 const getCityGeo = (city) => {
     let apiURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${WEATHER_API_KEY}`;
@@ -18,7 +25,7 @@ const getCityGeo = (city) => {
                 .then((data) => {
                     let lat = data[0].lat;
                     let lon = data[0].lon;
-                    let cityName = data[0].name
+                    let cityName = data[0].name;
                     getCityWeather(lat, lon, cityName);
                 })
             } else {
@@ -53,24 +60,26 @@ const displayWeather = (data, cityName) => {
     let humidity = `${data.current.humidity}%`;
     let uv = data.current.uvi
 
-    let forcastArray = [temp, wind, humidity, uv];
+    let forcast = {
+        temperature: temp,
+        windSpeed: wind,
+        humidity: humidity,
+        uvIndex: uv
+    }
 
     let city = cityName
 
     let cityNameEl = document.getElementById('city-name');
     cityNameEl.textContent = city;
 
-    displayForcast(forcastArray);
-
+    displayForcast(forcast);
 };
 
-const displayForcast = (arr) => {
-    arr.forEach((item) => {
-        let forcastListItemEl = document.createElement('li');
-        forcastListItemEl.className = 'list-group-item';
-        forcastListItemEl.textContent = item;
-        forcastListEl.appendChild(forcastListItemEl);
-    });
+const displayForcast = (obj) => {
+    tempEl.textContent = obj.temperature;
+    windEl.textContent = obj.windSpeed;
+    humidityEl.textContent = obj.humidity;
+    uvEl.textContent = obj.uvIndex;
 };
 
 const formSubmitHandler = (event) => {
@@ -85,4 +94,5 @@ const formSubmitHandler = (event) => {
     };
 };
 
+displayDate();
 searchFormEl.addEventListener('submit', formSubmitHandler);
