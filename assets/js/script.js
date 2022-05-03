@@ -93,6 +93,17 @@ const displayForcast = (obj) => {
 
 const displayFutureWeather = (data) => {
     for (let i = 1; i < 6; i++) {
+        let tempEl = document.getElementById(`temp+${i}`);
+        let windEl = document.getElementById(`wind+${i}`);
+        let humidityEl = document.getElementById(`humidity+${i}`);
+        
+        let temp = data[i].temp.day;
+        let wind = data[i].wind_speed;
+        let humidity = data[i].humidity;
+        
+        tempEl.textContent = `${temp} °F`;
+        windEl.textContent = `${wind} MPH`;
+        humidityEl.textContent = `${humidity}%`;
     }
 }
 
