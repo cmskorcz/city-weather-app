@@ -1,17 +1,15 @@
 const WEATHER_API_KEY = 'bc8dee79f60c665335a895eb0f9a0afb'
 
-let searchHistoryEl = document.getElementById('search-history');
-let searchInputEl = document.getElementById('search-input');
 let searchFormEl = document.getElementById('search-form');
-
-let dateEl = document.getElementById('date');
 let tempEl = document.getElementById('temp');
 let windEl = document.getElementById('wind');
 let humidityEl = document.getElementById('humidity');
 let uvEl = document.getElementById('uv');
+let iconEl = document.getElementById('weather-icon');
 
 
 const displayDate = () => {
+    let dateEl = document.getElementById('date');
     let now = dayjs().format('(MM/DD/YYYY)');
     dateEl.textContent = now;
 
@@ -54,6 +52,7 @@ const getCityWeather = (lat, lon, cityName) => {
             if(res.ok) {
                 res.json()
                     .then((data) => {
+                        console.log(data)
                         displayWeather(data, cityName);
                         displayFutureWeather(data.daily);
                 });
@@ -67,13 +66,15 @@ const displayWeather = (data, cityName) => {
     let temp = `${data.current.temp} °F`;
     let wind = `${data.current.wind_speed} MPH`;
     let humidity = `${data.current.humidity}%`;
-    let uv = data.current.uvi
+    let uv = data.current.uvi;
+    let icon = data.current.weather[0].icon;
 
     let forcast = {
         temperature: temp,
         windSpeed: wind,
         humidity: humidity,
-        uvIndex: uv
+        uvIndex: uv,
+        icon: icon
     }
 
     let city = cityName
@@ -89,6 +90,7 @@ const displayForcast = (obj) => {
     windEl.textContent = obj.windSpeed;
     humidityEl.textContent = obj.humidity;
     uvEl.textContent = obj.uvIndex;
+    iconEl.setAttribute('src', `http://openweathermap.org/img/wn/${obj.icon}.png`)
 };
 
 const displayFutureWeather = (data) => {
@@ -109,6 +111,8 @@ const displayFutureWeather = (data) => {
 
 const formSubmitHandler = (event) => {
     event.preventDefault();
+
+    let searchInputEl = document.getElementById('search-input');
     let city = searchInputEl.value.trim();
 
     if (city) {
@@ -121,6 +125,7 @@ const formSubmitHandler = (event) => {
 };
 
 const storeSeachHistory = (city) => {
+    let searchHistoryEl = document.getElementById('search-history');
     let buttonEl = document.createElement('button');
     
     buttonEl.classList = 'btn btn-secondary col-12 mb-3';
@@ -177,6 +182,7 @@ const displayHistory = () => {
     let historyArray = JSON.parse(historyJSON);
 
     historyArray.forEach((city) => {
+        let searchHistoryEl = document.getElementById('search-history');
         let buttonEl = document.createElement('button');
     
         buttonEl.classList = 'btn btn-secondary col-12 mb-3';
