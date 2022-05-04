@@ -1,11 +1,6 @@
 const WEATHER_API_KEY = 'bc8dee79f60c665335a895eb0f9a0afb'
 
 let searchFormEl = document.getElementById('search-form');
-let tempEl = document.getElementById('temp');
-let windEl = document.getElementById('wind');
-let humidityEl = document.getElementById('humidity');
-let uvEl = document.getElementById('uv');
-let iconEl = document.getElementById('weather-icon');
 
 
 const displayDate = () => {
@@ -86,6 +81,12 @@ const displayWeather = (data, cityName) => {
 };
 
 const displayForcast = (obj) => {
+    let tempEl = document.getElementById('temp');
+    let windEl = document.getElementById('wind');
+    let humidityEl = document.getElementById('humidity');
+    let uvEl = document.getElementById('uv');
+    let iconEl = document.getElementById('weather-icon');
+
     tempEl.textContent = obj.temperature;
     windEl.textContent = obj.windSpeed;
     humidityEl.textContent = obj.humidity;
@@ -98,14 +99,18 @@ const displayFutureWeather = (data) => {
         let tempEl = document.getElementById(`temp+${i}`);
         let windEl = document.getElementById(`wind+${i}`);
         let humidityEl = document.getElementById(`humidity+${i}`);
-        
+        let iconEl = document.getElementById(`icon+${i}`);
+
+        let icon = data[i].weather[0].icon;
         let temp = data[i].temp.day;
         let wind = data[i].wind_speed;
         let humidity = data[i].humidity;
         
+        iconEl.setAttribute('src', `http://openweathermap.org/img/wn/${icon}.png`)
         tempEl.textContent = `${temp} °F`;
         windEl.textContent = `${wind} MPH`;
         humidityEl.textContent = `${humidity}%`;
+
     }
 }
 
