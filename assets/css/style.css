@@ -32,3 +32,15 @@
 .future-forcast {
     list-style: none;
 }
+
+.uv-green {
+    background-color: green;
+}
+
+.uv-yellow {
+    background-color: yellow;
+}
+
+.uv-red {
+    background-color: red;
+}
