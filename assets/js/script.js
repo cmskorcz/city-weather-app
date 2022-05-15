@@ -1,11 +1,6 @@
 const WEATHER_API_KEY = 'bc8dee79f60c665335a895eb0f9a0afb'
 
 let searchFormEl = document.getElementById('search-form');
-let tempEl = document.getElementById('temp');
-let windEl = document.getElementById('wind');
-let humidityEl = document.getElementById('humidity');
-let uvEl = document.getElementById('uv');
-let iconEl = document.getElementById('weather-icon');
 
 
 const displayDate = () => {
@@ -40,7 +35,6 @@ const getCityGeo = (city) => {
         })
         .catch((err) => {
             alert('There was an error with your search');
-            console.log(err);
         });
 };
 
@@ -52,7 +46,6 @@ const getCityWeather = (lat, lon, cityName) => {
             if(res.ok) {
                 res.json()
                     .then((data) => {
-                        console.log(data)
                         displayWeather(data, cityName);
                         displayFutureWeather(data.daily);
                 });
@@ -68,7 +61,6 @@ const displayWeather = (data, cityName) => {
     let humidity = `${data.current.humidity}%`;
     let uv = data.current.uvi;
     let icon = data.current.weather[0].icon;
-
     let forcast = {
         temperature: temp,
         windSpeed: wind,
@@ -86,26 +78,52 @@ const displayWeather = (data, cityName) => {
 };
 
 const displayForcast = (obj) => {
+    let tempEl = document.getElementById('temp');
+    let windEl = document.getElementById('wind');
+    let humidityEl = document.getElementById('humidity');
+    let uvEl = document.getElementById('uv');
+    let iconEl = document.getElementById('weather-icon');
+
     tempEl.textContent = obj.temperature;
     windEl.textContent = obj.windSpeed;
     humidityEl.textContent = obj.humidity;
     uvEl.textContent = obj.uvIndex;
     iconEl.setAttribute('src', `http://openweathermap.org/img/wn/${obj.icon}.png`)
+
+    uvColorSelector(uvEl);
 };
+
+const uvColorSelector = (element) => {
+    
+    if (element.textContent < 3) {
+        element.classList.remove('uv-yellow', 'uv-red', 'text-black')
+        element.classList = 'badge uv-green';
+    } else if (3 <= element.textContent < 6) {
+        element.classList.remove('uv-green', 'uv-red');
+        element.classList = 'badge uv-yellow text-black';
+    } else {
+        element.classList.remove('uv-green', 'uv-yellow', 'text-black');
+        element.classList = 'badge uv-red';
+    }
+}
 
 const displayFutureWeather = (data) => {
     for (let i = 1; i < 6; i++) {
         let tempEl = document.getElementById(`temp+${i}`);
         let windEl = document.getElementById(`wind+${i}`);
         let humidityEl = document.getElementById(`humidity+${i}`);
-        
+        let iconEl = document.getElementById(`icon+${i}`);
+
+        let icon = data[i].weather[0].icon;
         let temp = data[i].temp.day;
         let wind = data[i].wind_speed;
         let humidity = data[i].humidity;
         
+        iconEl.setAttribute('src', `http://openweathermap.org/img/wn/${icon}.png`)
         tempEl.textContent = `${temp} °F`;
         windEl.textContent = `${wind} MPH`;
         humidityEl.textContent = `${humidity}%`;
+
     }
 }
 
@@ -163,7 +181,6 @@ const saveLocalStorage = (city) => {
         let historyArray = JSON.parse(historyJSON)
         historyArray.push(city);
         localStorage.setItem('weather-history', JSON.stringify(historyArray))
-        console.log(historyArray);
     }
 }
 
