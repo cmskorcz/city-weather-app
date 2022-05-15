@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#search-form {
+    border-bottom: 3px solid grey;
+}
+
+#today-weather-container {
+    border: 2px solid grey;
+}
+
+#today-weather-list {
+    padding-left: 0;
+}
+
+#city-name {
+    display: inline;
+}
+
+#heading-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+#weather-icon {
+    display: inline;
+}
+
+.future-forcast {
+    list-style: none;
+}
+
+.uv-green {
+    background-color: green;
+}
+
+.uv-yellow {
+    background-color: yellow;
+}
+
+.uv-red {
+    background-color: red;
+}
