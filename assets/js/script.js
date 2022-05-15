@@ -17,7 +17,7 @@ const displayDate = () => {
 }
 
 const getCityGeo = (city) => {
-    let apiURL = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${WEATHER_API_KEY}`;
+    let apiURL = `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${WEATHER_API_KEY}`;
 
     fetch(apiURL)
         .then((res) => {
