@@ -88,7 +88,7 @@ const displayForcast = (obj) => {
     windEl.textContent = obj.windSpeed;
     humidityEl.textContent = obj.humidity;
     uvEl.textContent = obj.uvIndex;
-    iconEl.setAttribute('src', `http://openweathermap.org/img/wn/${obj.icon}.png`)
+    iconEl.setAttribute('src', `https://openweathermap.org/img/wn/${obj.icon}.png`)
 
     uvColorSelector(uvEl);
 };
@@ -119,7 +119,7 @@ const displayFutureWeather = (data) => {
         let wind = data[i].wind_speed;
         let humidity = data[i].humidity;
         
-        iconEl.setAttribute('src', `http://openweathermap.org/img/wn/${icon}.png`)
+        iconEl.setAttribute('src', `https://openweathermap.org/img/wn/${icon}.png`)
         tempEl.textContent = `${temp} °F`;
         windEl.textContent = `${wind} MPH`;
         humidityEl.textContent = `${humidity}%`;
